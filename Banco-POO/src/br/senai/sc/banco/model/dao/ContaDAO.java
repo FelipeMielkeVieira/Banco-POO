@@ -8,4 +8,12 @@ public class ContaDAO {
     private static ArrayList<ContaPessoal> listaContas = new ArrayList<>();
 
 
+    public ContaPessoal selecionarPorCartao(String numeroCartao) {
+        for (ContaPessoal conta : listaContas) {
+            if (conta.getNumero().equals(numeroCartao)) {
+                return conta;
+            }
+        }
+        throw new RuntimeException("Conta não encontrada");
+    }
 }

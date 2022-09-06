@@ -86,4 +86,36 @@ public class ContaPessoal {
     public void setBanco(Banco banco) {
         this.banco = banco;
     }
+
+    public ContaPessoal validaLogin(String senha) {
+        if (this.getSenha().equals(senha)) {
+            return this;
+        }
+        throw new RuntimeException("Senha incorreta");
+    }
+
+    public boolean validaValor(double valor) {
+        if (this instanceof ContaCredito) {
+            if (this.getSaldo() + ((ContaCredito) this).getLimite() >= valor) {
+                return true;
+            }
+        } else if (this.getSaldo() >= valor) {
+            return true;
+        }
+        return false;
+    }
+
+    public void diminuirSaldo(double valor) {
+        if (this instanceof ContaCredito) {
+            if (this.getSaldo() >= valor) {
+                this.setSaldo(this.getSaldo() - valor);
+            } else {
+                valor = (this.getSaldo() - valor) * -1;
+                this.setSaldo(0);
+                ((ContaCredito) this).setLimite(((ContaCredito) this).getLimite() - valor);
+            }
+        } else {
+            this.setSaldo(this.getSaldo() - valor);
+        }
+    }
 }

@@ -1,5 +1,8 @@
 package br.senai.sc.banco.view;
 
+import br.senai.sc.banco.controller.ContaController;
+import br.senai.sc.banco.model.entities.ContaPessoal;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +20,15 @@ public class Login extends JFrame implements Runnable {
         entrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ContaController controller = new ContaController();
+                try {
+                    ContaPessoal conta = controller.validaLogin(numeroCartaoInput.getText(), senhaInput.getText());
+                    dispose();
+                    Menu menu = new Menu(conta);
+                    menu.setVisible(true);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
             }
         });
     }
