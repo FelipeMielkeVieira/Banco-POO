@@ -15,7 +15,17 @@ public class Login extends JFrame implements Runnable {
     private JTextField numeroCartaoInput;
     private JPasswordField senhaInput;
     public static Banco banco = new Banco("123", "Banco");
-
+    
+    /*
+    Cancelar em depositar
+    Feedback depositado
+    Cancelar em sacar
+    Feedback sacar
+    Pagar boleto (sair tela do boleto ao clicar em pagar)
+    Voltar ao menu ao confirmar boleto pago
+    Feedback transferir
+    Arrumar to string imprimir dados
+     */
     public Login() {
         criarComponentes();
 
