@@ -1,6 +1,6 @@
 package br.senai.sc.banco.model.entities;
 
-public class ContaPessoal {
+public abstract class ContaPessoal {
     private String numero, agencia, senha;
     private double saldo;
     private Cliente cliente;
@@ -31,12 +31,10 @@ public class ContaPessoal {
 
     }
 
-    public void sacar() {
+    public abstract void sacar();
 
-    }
-
-    public void imprimirDados() {
-
+    public String imprimirDados() {
+        return this.toString();
     }
 
     public String getNumero() {

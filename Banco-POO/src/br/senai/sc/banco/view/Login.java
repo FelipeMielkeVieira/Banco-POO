@@ -1,6 +1,7 @@
 package br.senai.sc.banco.view;
 
 import br.senai.sc.banco.controller.ContaController;
+import br.senai.sc.banco.model.entities.Banco;
 import br.senai.sc.banco.model.entities.ContaPessoal;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ public class Login extends JFrame implements Runnable {
     private JButton entrarButton;
     private JTextField numeroCartaoInput;
     private JPasswordField senhaInput;
+    public static Banco banco = new Banco("123", "Banco");
 
     public Login() {
         criarComponentes();
@@ -29,6 +31,14 @@ public class Login extends JFrame implements Runnable {
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage());
                 }
+            }
+        });
+        cadastrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Cadastro cadastroConta = new Cadastro();
+                cadastroConta.setVisible(true);
             }
         });
     }

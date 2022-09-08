@@ -1,5 +1,6 @@
 package br.senai.sc.banco.view;
 
+import br.senai.sc.banco.controller.ContaController;
 import br.senai.sc.banco.model.entities.ContaCorrente;
 import br.senai.sc.banco.model.entities.ContaCredito;
 import br.senai.sc.banco.model.entities.ContaPessoal;
@@ -35,7 +36,9 @@ public class Menu extends JFrame {
         depositarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String valor = JOptionPane.showInputDialog(null, "Insira o valor a ser depositado");
+                ContaController contaController = new ContaController();
+                contaController.depositar(conta, valor);
             }
         });
         sacarButton.addActionListener(new ActionListener() {

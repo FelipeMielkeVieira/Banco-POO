@@ -1,5 +1,7 @@
 package br.senai.sc.banco.model.entities;
 
+import br.senai.sc.banco.view.Login;
+
 public class ContaCredito extends ContaPessoal {
     private double limite;
 
@@ -8,11 +10,21 @@ public class ContaCredito extends ContaPessoal {
         this.limite = limite;
     }
 
+    public static ContaCredito cadastrar(String numero, String agencia, String senha, Cliente cliente, Double dadoAdicional) {
+        ContaCredito conta = new ContaCredito(dadoAdicional, numero, agencia, senha, 0, cliente, Login.banco);
+        return conta;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "ContaCredito{" +
                 "limite=" + limite +
                 '}';
+    }
+
+    @Override
+    public void sacar() {
+
     }
 
     public void pagarBoleto(Boleto boleto) {
