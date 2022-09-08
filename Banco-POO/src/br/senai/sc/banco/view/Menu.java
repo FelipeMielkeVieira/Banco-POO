@@ -6,6 +6,7 @@ import br.senai.sc.banco.model.entities.ContaCredito;
 import br.senai.sc.banco.model.entities.ContaPessoal;
 import br.senai.sc.banco.model.entities.ContaPoupanca;
 
+import javax.print.attribute.standard.JobName;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,19 +45,30 @@ public class Menu extends JFrame {
         sacarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String valor = JOptionPane.showInputDialog(null, "Insira o valor a ser sacado");
+                ContaController contaController = new ContaController();
+                contaController.diminuirSaldo(conta, valor);
             }
         });
         imprimirDadosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ContaController controller = new ContaController();
+                JOptionPane.showMessageDialog(null, controller.imprimirDados(conta));
             }
         });
         transferirButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ContaController controller = new ContaController();
+                String numeroDestinatario = JOptionPane.showInputDialog(null, "Informe o número da conta a receber");
+                String valor = JOptionPane.showInputDialog(null, "Informe o valor a ser transferido");
 
+                try {
+                    controller.transferir(conta, numeroDestinatario, valor);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
             }
         });
         pagarBoletoButton.addActionListener(new ActionListener() {

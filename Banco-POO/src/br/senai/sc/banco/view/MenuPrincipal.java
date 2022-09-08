@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuPrincipal extends JFrame implements Runnable {
+public class MenuPrincipal extends JFrame {
     private JButton novoClienteButton;
     private JPanel painelPrincipal;
     private JButton novaContaButton;
@@ -50,19 +50,5 @@ public class MenuPrincipal extends JFrame implements Runnable {
         setContentPane(painelPrincipal);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
-    }
-
-    @Override
-    public void run() {
-        if (!isVisible()) {
-            setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "A janela já está aberta!");
-        }
-    }
-
-    public static void main(String[] args) {
-        MenuPrincipal programa = new MenuPrincipal();
-        programa.run();
     }
 }

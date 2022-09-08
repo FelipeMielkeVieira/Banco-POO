@@ -3,6 +3,8 @@ package br.senai.sc.banco.controller;
 import br.senai.sc.banco.model.entities.*;
 import br.senai.sc.banco.model.service.ContaService;
 
+import javax.swing.*;
+
 public class ContaController {
     ContaPessoal model;
 
@@ -14,12 +16,12 @@ public class ContaController {
 
     public boolean validaValor(ContaPessoal conta, String valor) {
         model = conta;
-        return model.validaValor(Float.parseFloat(valor));
+        return model.validaValor(Double.parseDouble(valor));
     }
 
     public void diminuirSaldo(ContaPessoal conta, String valor) {
         model = conta;
-        model.diminuirSaldo(Float.parseFloat(valor));
+        model.diminuirSaldo(Double.parseDouble(valor));
     }
 
     public void cadastrar(String numero, String agencia, String senha, String cpf, TipoConta tipoConta, String dadoAdicional) {
@@ -54,6 +56,21 @@ public class ContaController {
     }
 
     public void depositar(ContaPessoal conta, String valor) {
+        conta.depositar(Double.parseDouble(valor));
+    }
 
+    public String imprimirDados(ContaPessoal conta) {
+        return conta.imprimirDados();
+    }
+
+    public void transferir(ContaPessoal conta, String numeroDestinatario, String valor) {
+        ContaService service = new ContaService();
+        ContaPessoal contaDestinario = service.selecionarPorCartao(numeroDestinatario);
+        if (validaValor(conta, valor)) {
+            contaDestinario.depositar(Double.parseDouble(valor));
+            conta.diminuirSaldo(Double.parseDouble(valor));
+        } else {
+            throw new RuntimeException("Saldo insuficiente!");
+        }
     }
 }

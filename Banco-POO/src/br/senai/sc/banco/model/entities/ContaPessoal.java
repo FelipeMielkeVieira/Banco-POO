@@ -27,8 +27,8 @@ public abstract class ContaPessoal {
                 '}';
     }
 
-    public void depositar() {
-
+    public void depositar(double valor) {
+        this.setSaldo(this.getSaldo() + valor);
     }
 
     public abstract void sacar();

@@ -15,9 +15,7 @@ public class Banco {
     public String toString() {
         return "Banco{" +
                 "cnpj='" + cnpj + '\'' +
-                ", nome='" + nome + '\'' +
-                ", listaContas=" + listaContas +
-                '}';
+                ", nome='" + nome + '\'';
     }
 
     public void criarContas() {
