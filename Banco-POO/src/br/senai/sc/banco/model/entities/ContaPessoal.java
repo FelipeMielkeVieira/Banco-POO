@@ -24,14 +24,6 @@ public abstract class ContaPessoal {
                 "\nSaldo: " + this.getSaldo();
     }
 
-    public void depositar(Double valor) {
-        this.setSaldo(this.getSaldo() + valor);
-    }
-
-    public String imprimirDados() {
-        return this.toString();
-    }
-
     public String getNumero() {
         return numero;
     }
@@ -68,22 +60,19 @@ public abstract class ContaPessoal {
         this.banco = banco;
     }
 
+    public void depositar(Double valor) {
+        this.setSaldo(this.getSaldo() + valor);
+    }
+
+    public String imprimirDados() {
+        return this.toString();
+    }
+
     public ContaPessoal validaLogin(String senha) {
         if (this.getSenha().equals(senha)) {
             return this;
         }
         throw new RuntimeException("Senha incorreta");
-    }
-
-    public boolean validaValor(Double valor) {
-        if (this instanceof ContaCredito) {
-            if (this.getSaldo() + ((ContaCredito) this).getLimite() >= valor) {
-                return true;
-            }
-        } else if (this.getSaldo() >= valor) {
-            return true;
-        }
-        return false;
     }
 
     public abstract void diminuirSaldo(Double valor);

@@ -12,11 +12,6 @@ public class ContaController {
         return model.validaLogin(senha);
     }
 
-    public boolean validaValor(ContaPessoal conta, String valor) {
-        model = conta;
-        return model.validaValor(Double.parseDouble(valor));
-    }
-
     public void diminuirSaldo(ContaPessoal conta, String valor) {
         model = conta;
         model.diminuirSaldo(Double.parseDouble(valor));
@@ -64,11 +59,7 @@ public class ContaController {
     public void transferir(ContaPessoal conta, String numeroDestinatario, String valor) {
         ContaService service = new ContaService();
         ContaPessoal contaDestinario = service.selecionarPorCartao(numeroDestinatario);
-        if (validaValor(conta, valor)) {
-            contaDestinario.depositar(Double.parseDouble(valor));
-            conta.diminuirSaldo(Double.parseDouble(valor));
-        } else {
-            throw new RuntimeException("Saldo insuficiente!");
-        }
+        conta.diminuirSaldo(Double.parseDouble(valor));
+        contaDestinario.depositar(Double.parseDouble(valor));
     }
 }
