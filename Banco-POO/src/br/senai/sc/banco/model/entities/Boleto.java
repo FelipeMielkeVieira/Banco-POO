@@ -2,9 +2,9 @@ package br.senai.sc.banco.model.entities;
 
 public class Boleto {
     private String codigoBarras, dataVencimento;
-    private double valor;
+    private Double valor;
 
-    public Boleto(String codigoBarras, String dataVencimento, double valor) {
+    public Boleto(String codigoBarras, String dataVencimento, Double valor) {
         this.codigoBarras = codigoBarras;
         this.dataVencimento = dataVencimento;
         this.valor = valor;
@@ -19,27 +19,4 @@ public class Boleto {
                 '}';
     }
 
-    public String getCodigoBarras() {
-        return codigoBarras;
-    }
-
-    public void setCodigoBarras(String codigoBarras) {
-        this.codigoBarras = codigoBarras;
-    }
-
-    public String getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(String dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
 }

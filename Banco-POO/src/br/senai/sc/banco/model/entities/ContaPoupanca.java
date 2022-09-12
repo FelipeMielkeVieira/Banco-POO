@@ -3,23 +3,25 @@ package br.senai.sc.banco.model.entities;
 import br.senai.sc.banco.view.Login;
 
 public class ContaPoupanca extends ContaPessoal {
-    private double taxaPercentual;
+    private Double taxaPercentual;
 
-    public ContaPoupanca(double taxaPercentual, String numero, String agencia, String senha, double saldo, Cliente cliente, Banco banco) {
+    public ContaPoupanca(Double taxaPercentual, String numero, String agencia, String senha, Double saldo, Cliente cliente, Banco banco) {
         super(numero, agencia, senha, saldo, cliente, banco);
         this.taxaPercentual = taxaPercentual;
     }
 
     public static ContaPoupanca cadastrar(String numero, String agencia, String senha, Cliente cliente, Double dadoAdicional) {
-        ContaPoupanca conta = new ContaPoupanca(dadoAdicional, numero, agencia, senha, 0, cliente, Login.banco);
+        ContaPoupanca conta = new ContaPoupanca(dadoAdicional, numero, agencia, senha, 0.0, cliente, Login.banco);
         return conta;
     }
 
-    public void transferir() {}
-
     @Override
-    public void sacar() {
-
+    public void diminuirSaldo(Double valor) {
+        if (this.getSaldo() >= valor) {
+            this.setSaldo(this.getSaldo() - valor);
+        } else {
+            throw new RuntimeException("Saldo Insuficiente!");
+        }
     }
 
     @Override

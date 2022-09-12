@@ -38,16 +38,26 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String valor = JOptionPane.showInputDialog(null, "Insira o valor a ser depositado");
-                ContaController contaController = new ContaController();
-                contaController.depositar(conta, valor);
+                if(valor != null) {
+                    ContaController contaController = new ContaController();
+                    contaController.depositar(conta, valor);
+                    JOptionPane.showMessageDialog(null, "Valor depositado com sucesso!");
+                }
             }
         });
         sacarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String valor = JOptionPane.showInputDialog(null, "Insira o valor a ser sacado");
-                ContaController contaController = new ContaController();
-                contaController.diminuirSaldo(conta, valor);
+                try {
+                    String valor = JOptionPane.showInputDialog(null, "Insira o valor a ser sacado");
+                    if(valor != null) {
+                        ContaController contaController = new ContaController();
+                        contaController.diminuirSaldo(conta, valor);
+                        JOptionPane.showMessageDialog(null, "Valor retirado com sucesso!");
+                    }
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
+                }
             }
         });
         imprimirDadosButton.addActionListener(new ActionListener() {
@@ -66,6 +76,7 @@ public class Menu extends JFrame {
 
                 try {
                     controller.transferir(conta, numeroDestinatario, valor);
+                    JOptionPane.showMessageDialog(null, "Valor transferido com sucesso!");
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(null, exception.getMessage());
                 }

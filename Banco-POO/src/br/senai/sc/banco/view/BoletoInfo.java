@@ -1,7 +1,6 @@
 package br.senai.sc.banco.view;
 
 import br.senai.sc.banco.controller.ContaController;
-import br.senai.sc.banco.model.entities.ContaPessoal;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,9 +8,7 @@ import java.awt.event.ActionListener;
 
 public class BoletoInfo extends JFrame {
     private JPanel programa;
-    private JTextField codigoBarrasInput;
     private JTextField valorInput;
-    private JTextField vencimentoInput;
     private JButton pagarBoletoButton;
     private JButton cancelarButton;
 
@@ -29,11 +26,14 @@ public class BoletoInfo extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ContaController conta = new ContaController();
-                if (conta.validaValor(Menu.getConta(), valorInput.getText())) {
+                try {
                     conta.diminuirSaldo(Menu.getConta(), valorInput.getText());
                     JOptionPane.showMessageDialog(null, "Boleto pago!");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Saldo insuficiente!");
+                    dispose();
+                    Menu menu = new Menu(Menu.getConta());
+                    menu.setVisible(true);
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, exception.getMessage());
                 }
             }
         });

@@ -2,11 +2,11 @@ package br.senai.sc.banco.model.entities;
 
 public abstract class ContaPessoal {
     private String numero, agencia, senha;
-    private double saldo;
+    private Double saldo;
     private Cliente cliente;
     private Banco banco;
 
-    public ContaPessoal(String numero, String agencia, String senha, double saldo, Cliente cliente, Banco banco) {
+    public ContaPessoal(String numero, String agencia, String senha, Double saldo, Cliente cliente, Banco banco) {
         this.numero = numero;
         this.agencia = agencia;
         this.senha = senha;
@@ -17,21 +17,16 @@ public abstract class ContaPessoal {
 
     @Override
     public String toString() {
-        return "ContaPessoal{" +
-                "numero='" + numero + '\'' +
-                ", agencia='" + agencia + '\'' +
-                ", senha='" + senha + '\'' +
-                ", saldo=" + saldo +
-                ", cliente=" + cliente +
-                ", banco=" + banco +
-                '}';
+        return "Número da Conta: " + this.getNumero() +
+                "\nAgência: " + this.getAgencia() +
+                "\nProprietário: " + this.getCliente().getNome() +
+                "\nBanco: " + this.getBanco().getNome() +
+                "\nSaldo: " + this.getSaldo();
     }
 
-    public void depositar(double valor) {
+    public void depositar(Double valor) {
         this.setSaldo(this.getSaldo() + valor);
     }
-
-    public abstract void sacar();
 
     public String imprimirDados() {
         return this.toString();
@@ -41,31 +36,19 @@ public abstract class ContaPessoal {
         return numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public String getAgencia() {
         return agencia;
-    }
-
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public double getSaldo() {
+    public Double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(Double saldo) {
         this.saldo = saldo;
     }
 
@@ -92,7 +75,7 @@ public abstract class ContaPessoal {
         throw new RuntimeException("Senha incorreta");
     }
 
-    public boolean validaValor(double valor) {
+    public boolean validaValor(Double valor) {
         if (this instanceof ContaCredito) {
             if (this.getSaldo() + ((ContaCredito) this).getLimite() >= valor) {
                 return true;
@@ -103,17 +86,5 @@ public abstract class ContaPessoal {
         return false;
     }
 
-    public void diminuirSaldo(double valor) {
-        if (this instanceof ContaCredito) {
-            if (this.getSaldo() >= valor) {
-                this.setSaldo(this.getSaldo() - valor);
-            } else {
-                valor = (this.getSaldo() - valor) * -1;
-                this.setSaldo(0);
-                ((ContaCredito) this).setLimite(((ContaCredito) this).getLimite() - valor);
-            }
-        } else {
-            this.setSaldo(this.getSaldo() - valor);
-        }
-    }
+    public abstract void diminuirSaldo(Double valor);
 }

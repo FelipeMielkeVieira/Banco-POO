@@ -3,8 +3,6 @@ package br.senai.sc.banco.controller;
 import br.senai.sc.banco.model.entities.*;
 import br.senai.sc.banco.model.service.ContaService;
 
-import javax.swing.*;
-
 public class ContaController {
     ContaPessoal model;
 
