@@ -14,7 +14,7 @@ public class Login extends JFrame implements Runnable {
     private JButton entrarButton;
     private JTextField numeroCartaoInput;
     private JPasswordField senhaInput;
-    public static Banco banco = new Banco("123", "Banco");
+    public static Banco banco = new Banco("123", "RoBank");
 
     public Login() {
         criarComponentes();
