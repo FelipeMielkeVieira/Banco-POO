@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 
 public class BoletoInfo extends JFrame {
     private JPanel programa;
+    private JTextField codigoBarrasInput;
     private JTextField valorInput;
+    private JTextField vencimentoInput;
     private JButton pagarBoletoButton;
     private JButton cancelarButton;
 
